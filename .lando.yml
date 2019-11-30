@@ -21,7 +21,29 @@ services:
       - apt-get update -y && apt-get install -y subversion
     composer:
       phpunit/phpunit: "^6"
+  node:
+    type: node
+    overrides:
+      ports:
+        - 3000:3000
 tooling:
   phpunit:
     service: appserver
     description: "Run PHP Unit tests: lando phpunit"
+  php:
+    service: appserver
+  composer:
+    service: appserver
+  npm:
+    service: node
+  gulp:
+    service: node
+  yarn:
+    service: node
+  # workflow command shortcuts
+  build:
+    service: node
+    cmd: npm start
+  watch:
+    service: node
+    cmd: npm run watch
